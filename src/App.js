@@ -1,4 +1,9 @@
+
 import React, { useState} from 'react';
+import ToDoList from './ToDoList';
+
+
+
 
 const App = () => {
 
@@ -14,6 +19,20 @@ const App = () => {
     setItems((oldItems) => {
         return [...oldItems, inputList];
     });
+    setInputList('');
+    
+  };
+
+  const deleteItem =(id)=>{
+
+    
+
+    setItems((oldItems) => {
+      return oldItems.filter((errElm, index) => {
+        return index !== id;
+
+      });
+    });
     
   };
 
@@ -24,26 +43,32 @@ const App = () => {
    <>
 
    <div className="main_div">
+
+     
      <div className="center_div">
 
-     </div>
      <br/>
      <h1>ToDo List</h1>
      <br />
 
-     <input type="text" placeholder="Add a item " onChange={itemEvent} />
+     <input type="text" placeholder="Add a item " onChange={itemEvent} value={inputList} />
 
      <button onClick={listOfItems}> + </button>
 
      <ol>
        
 
-       {Items.map((itemval) => {
-         return <li> {itemval} </li>
+       {Items.map((itemval,k) => {
+            return <ToDoList key={k} id={k} text={itemval} onclick={deleteItem} />
        })}
 
        
      </ol>
+
+
+
+     </div>
+     
 
    </div>
 
